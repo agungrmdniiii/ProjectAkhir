@@ -1,0 +1,48 @@
+body {
+    background-color: #f8f9fa;
+}
+.data-box {
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #ffffff;
+    margin-bottom: 15px;
+    transition: background-color 0.3s, border-color 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+}
+.data-box.selected {
+    border-color: #012970;
+    background-color: #e9f7ff;
+}
+.data-box i {
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: #012970;
+}
+.chart-container {
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: #ffffff;
+    margin-top: 20px;
+    height: 500px;
+}
+.chart-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+.dropdown, .btn {
+    margin: 10px 0;
+}
+.chart-header {
+    margin-bottom: 15px;
+    font-size: 1.25rem;
+    text-align: center;
+    font-weight: bold;
+}

@@ -1,0 +1,49 @@
+.full-width-container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.card-body {
+    overflow-x: auto;
+}
+
+.table th, .table td {
+    white-space: nowrap;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #4e73df;
+}
+
+.btn-group {
+display: flex;
+align-items: center;
+gap: 10px;
+}
+
+.btn-group .btn {
+font-size: 0.875rem; /* Ukuran font yang lebih kecil untuk tombol */
+padding: 10px 20px; /* Padding yang lebih konsisten */
+height: auto; /* Tinggi tombol otomatis sesuai konten */
+line-height: 1.5; /* Tinggi baris lebih konsisten */
+white-space: nowrap; /* Pastikan teks tidak terpotong */
+}
+
+.form-control-file {
+    font-size: 0.875rem; /* Ukuran font yang lebih kecil untuk input file */
+}
+
+.year-select {
+    font-size: 0.875rem; /* Ukuran font yang lebih kecil */
+    height: 38px; /* Tinggi yang sama untuk dropdown */
+}
+

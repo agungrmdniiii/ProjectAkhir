@@ -1,0 +1,49 @@
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 20px;
+}
+.dashboard-box {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 100%;
+}
+.data-box {
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #ffffff;
+    margin-bottom: 15px;
+    transition: background-color 0.3s, border-color 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+}
+.data-box.selected {
+    border-color: #012970;
+    background-color: #e9f7ff;
+}
+.data-box i {
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: #012970;
+}
+.full-width {
+    grid-column: span 3; /* Memperluas ke tiga kolom */
+}
+.text-primary {
+    color: #012970 !important;
+}

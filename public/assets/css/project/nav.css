@@ -1,0 +1,133 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Poppins', sans-serif;
+    color: #012970;
+}
+.container {
+    max-width: 1700px;
+    margin-top: 30px;
+}
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+}
+.card-body {
+    padding: 30px;
+}
+.card-title {
+    font-size: 1.75rem;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #012970;
+    font-family: 'Garamond', serif;
+}
+.card-title i {
+    font-size: 2.5rem;
+    margin-right: 15px;
+    animation: logo-animation 4s infinite ease-in-out;
+    color: #012970;
+}
+.icon {
+    font-size: 4rem;
+    color: #012970;
+}
+.text-primary {
+    color: #012970 !important;
+}
+.mt-4 {
+    margin-top: 1.5rem !important;
+}
+.lead {
+    font-size: 1.5rem;
+    color: #012970;
+}
+.data-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+}
+.data-item {
+    text-align: center;
+    flex: 1;
+}
+.data-item h5 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: #012970;
+}
+.data-item p {
+    font-size: 1.1rem;
+    color: #012970;
+}
+.date-period {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: #012970;
+}
+.date-period label {
+    margin-right: 15px;
+    font-size: 1.1rem;
+    color: #012970;
+}
+.date-period select {
+    font-size: 1.1rem;
+    width: 180px;
+    color: #012970;
+}
+.bg-gradient-primary {
+    background: #ffffff !important;
+}
+.sidebar-brand {
+    color: #012970;
+    font-family: 'Garamond', serif;
+}
+.sidebar-brand-icon img {
+    width: 50px;
+}
+.sidebar-brand-text {
+    font-size: 1.5rem;
+    margin-right: 10px;
+    flex: 1;
+    text-align: center;
+    white-space: nowrap;
+}
+@keyframes logo-animation {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Custom styles for the sidebar */
+.sidebar {
+    width: 300px; /* Lebar sidebar */
+}
+.sidebar.toggled {
+    width: 80px; /* Lebar sidebar saat toggled */
+}
+.nav-link {
+    font-size: 1.1rem; /* Ukuran font untuk tautan di sidebar */
+    padding: 15px 25px; /* Menambah padding agar link terlihat lebih besar */
+}
+.nav-link i {
+    font-size: 1.5rem; /* Ukuran ikon di sidebar */
+    margin-right: 10px;
+}
+.sidebar-heading {
+    padding-left: 25px;
+}
+.sidebar-divider {
+    margin: 0 25px;
+}

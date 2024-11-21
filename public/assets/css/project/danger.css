@@ -1,0 +1,101 @@
+.custom-content .container {
+    max-width: 1200px;  
+    margin-top: 30px;
+}
+
+.custom-content .card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+}
+
+.custom-content .card-body {
+    padding: 30px;
+}
+
+.custom-content .card-title {
+    font-size: 1rem; /* Mengubah ukuran font hanya pada title dalam konten utama */
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-content .card-title img {
+    height: 150px;
+    margin-top: -70px;
+}
+
+.custom-content .icon {
+    font-size: 3rem; /* Ukuran ikon tetap sama */
+    color: #007bff;
+}
+
+.custom-content .text-primary {
+    color: #012970 !important;
+}
+
+.custom-content .mt-4 {
+    margin-top: 1.5rem !important;
+}
+
+.custom-content .lead {
+    font-size: 1.2rem; /* Ukuran teks lead tetap sama */
+}
+
+.custom-content .data-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    font-size: 1.2rem; /* Ukuran font dalam container data tetap sama */
+}
+
+.custom-content .data-item {
+    text-align: center;
+    flex: 1;
+}
+
+.custom-content .data-item h5 {
+    margin-bottom: 10px;
+    font-size: 1.5rem; /* Ukuran heading font tetap sama */
+}
+
+.custom-content .data-item p {
+    font-size: 1.2rem; /* Ukuran paragraf tetap sama */
+}
+
+.custom-content .text-center {
+    font-size: 1.2rem; /* Ukuran teks center tetap sama */
+}
+
+.custom-content .spinner {
+    font-size: 2.5rem; /* Ukuran ikon spinner tetap sama */
+    color: #007bff;
+    animation: spin 2s linear infinite;
+}
+
+.custom-content .weather-info {
+    font-size: 1.5rem; /* Ukuran teks untuk informasi cuaca tetap sama */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes logo-animation {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
