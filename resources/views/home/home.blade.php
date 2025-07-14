@@ -1,173 +1,106 @@
 @extends('home.v_template')
 
 @section('content')
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Monitoring</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        .dashboard-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(2, 1fr);
-            gap: 20px;
-        }
-        .dashboard-box {
-            background-color: #ffffff;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            height: 100%;
-        }
-        .data-box {
-            border: 1px solid #dee2e6;
-            border-radius: 5px;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            background-color: #ffffff;
-            margin-bottom: 15px;
-            transition: background-color 0.3s, border-color 0.3s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 150px;
-        }
-        .data-box.selected {
-            border-color: #012970;
-            background-color: #e9f7ff;
-        }
-        .data-box i {
-            font-size: 36px;
-            margin-bottom: 10px;
-            color: #012970;
-        }
-        .full-width {
-            grid-column: span 3; /* Memperluas ke tiga kolom */
-        }
-        .text-primary {
-            color: #012970 !important;
-        }
-    </style>
-</head>
-<body>
-    <div class="dashboard-container mt-5">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <h1 class="mb-4 text-primary">Selamat Datang di Sistem Smart Nursery</h1>
-            </div>
-        <div class="dashboard-grid">
-            <!-- Container 1 (Top Left) -->
-            <div class="dashboard-box">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 text-center mb-4">
-                            <h1>Kondisi Cuaca</h1>
-                        </div>
+    <div class="landing-container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 hero-text text-center">
+                        <h1 class="display-4 mb-3">Selamat Datang di <span class="text-primary">HAMAXPERT</span></h1>
+                        <p class="lead mb-4">Sistem Monitoring dan Pengendalian Hama Tanaman Padi</p>
+                        
                     </div>
-                    <div class="row mb-4">
-                        <div class="col-md-6">
-                            <div id="tempBox" class="data-box" data-type="temperature">
-                                <i class="fas fa-thermometer-half"></i>
-                                <h5>Suhu</h5>
-                                <p id="tempValue">25°C</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div id="humidityBox" class="data-box" data-type="humidity">
-                                <i class="fas fa-tint"></i>
-                                <h5>Kelembaban</h5>
-                                <p id="humidityValue">70%</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div id="rainBox" class="data-box" data-type="rainfall">
-                                <i class="fas fa-cloud-rain"></i>
-                                <h5>Curah Hujan</h5>
-                                <p id="rainValue">100 mm</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div id="solarBox" class="data-box" data-type="solar">
-                                <i class="fas fa-sun"></i>
-                                <h5>Radiasi Matahari</h5>
-                                <p id="solarValue">600 W/m²</p>
+                    <div class="col-lg-6 hero-image">
+                        <img src="{{asset('img')}}/wheat.png" alt="Tanaman Padi" class="img-fluid animated">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="container">
+            <!-- Bagian 1: Tentang Padi -->
+            <div class="row section mb-5">
+                <div class="col-md-6">
+                    <img src="{{asset('img')}}/rice.png" height="400px" style="margin-left: 100px"  class="rice-image" alt="Tanaman Padi">
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body"> 
+                            <h2 class="card-title section-title">Mengenal Tanaman Padi</h2>
+                            <div class="card-text">
+                                <p class="text-justify">
+                                    Padi (Oryza sativa) merupakan tanaman pangan utama di Indonesia yang menjadi sumber makanan pokok sebagian besar penduduk. 
+                                    Tanaman padi dapat tumbuh di sawah dengan ketinggian 0-1.500 meter di atas permukaan laut dengan suhu optimal 24-29°C.
+                                </p>
+                                <p class="text-justify">
+                                    Keistimewaan padi terletak pada perannya dalam menjaga ketahanan pangan nasional, di mana setiap butir padi mengandung kekayaan gizi, protein, mineral, dan karbohidrat yang menjadi sumber energi utama bagi lebih dari 270 juta penduduk. Keberagaman varietas padi, mulai dari padi sawah hingga padi gogo, menunjukkan kekayaan genetik dan adaptasi budidaya yang luar biasa, sekaligus menjadi pilar penopang kesejahteraan jutaan petani di seluruh Indonesia.
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Container 2 (Top Right) -->
-            <div class="dashboard-box">
-                <div class="container">
+            <!-- Bagian 2: Hama Padi -->
+            <div class="row section mb-5">
+                <div class="col-md-12">
+                    <h2 class="section-title text-center mb-4">Hama Utama Tanaman Padi</h2>
                     <div class="row">
-                        <div class="col-md-12 text-center mb-4">
-                            <h1>Kondisi Tanah</h1>
-                        </div>
                         <div class="col-md-4">
-                            <div id="nitrogenBox" class="data-box" data-type="nitrogen">
-                                <i class="fas fa-leaf"></i>
-                                <h5>Nitrogen</h5>
-                                <p>30%</p>
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title" onclick="showModal('{{asset('img')}}/wereng.jpg', 'Wereng Coklat')">Wereng Coklat</h5>
+                                    <p class="card-text">Hama yang menghisap cairan tanaman padi dan dapat menyebabkan penyakit virus kerdil.</p>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div id="phosphorusBox" class="data-box" data-type="phosphorus">
-                                <i class="fas fa-flask"></i>
-                                <h5>Fosfor</h5>
-                                <p>20%</p>
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title" onclick="showModal('{{asset('img')}}/penggerek.jpg', 'Penggerek Batang')">Penggerek Batang</h5>
+                                    <p class="card-text">Menyerang batang padi dan menyebabkan gagal pembentukan malai.</p>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div id="potassiumBox" class="data-box" data-type="potassium">
-                                <i class="fas fa-bolt"></i>
-                                <h5>Kalium</h5>
-                                <p>15%</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div id="soilTempBox" class="data-box" data-type="soilTemp">
-                                <i class="fas fa-thermometer-half"></i>
-                                <h5>Suhu Tanah</h5>
-                                <p>25°C</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div id="soilMoistureBox" class="data-box" data-type="soilMoisture">
-                                <i class="fas fa-tint"></i>
-                                <h5>Kelembaban Tanah</h5>
-                                <p>40%</p>
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title" onclick="showModal('{{asset('img')}}/walangsangit.jpg', 'Walang Sangit')">Walang Sangit</h5>
+                                    <p class="card-text">Menghisap bulir padi yang sedang mengisi dan menyebabkan bulir hampa.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Container 3: Deteksi Hama Berdasarkan Cuaca -->
-            <div class="dashboard-box full-width">
-                <div class="container">
-                    <div class="card-body">
-                        <div class="text-center mt-4 weather-info">
-                            <p><img src="{{asset('img')}}/cuaca.png" height="70px" style="margin-top: -10px;">Cuaca di Bandung, Coblong saat ini:</p>
+            <!-- Bagian 3: Pentingnya Pengendalian -->
+            <div class="row section mb-5">
+                <div class="col-md-12">
+                    <h2 class="section-title text-center">Pentingnya Pengendalian Hama Padi</h2>
+                    <div class="row mt-4">
+                        <div class="col-md-4">
+                            <div class="feature-box text-center">
+                                <i class="fas fa-chart-line fa-3x mb-3 text-primary"></i>
+                                <h4>Produktivitas</h4>
+                                <p>Meningkatkan hasil panen hingga 40% dengan pengendalian hama yang tepat</p>
+                            </div>
                         </div>
-                        <div id="dataDisplay" class="data-container">
-                            <!-- Data will be displayed here -->
+                        <div class="col-md-4">
+                            <div class="feature-box text-center">
+                                <i class="fas fa-leaf fa-3x mb-3 text-primary"></i>
+                                <h4>Kualitas</h4>
+                                <p>Menjaga kualitas beras yang dihasilkan tetap optimal</p>
+                            </div>
                         </div>
-                        <div id="result" class="mt-4">
-                            <h4>Hama yang mungkin muncul:</h4>
-                            <!-- Hasil deteksi hama akan ditampilkan di sini -->
+                        <div class="col-md-4">
+                            <div class="feature-box text-center">
+                                <i class="fas fa-dollar-sign fa-3x mb-3 text-primary"></i>
+                                <h4>Ekonomi</h4>
+                                <p>Mengurangi kerugian ekonomi akibat serangan hama</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -175,102 +108,164 @@
         </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            function fetchWeatherData() {
-                $.ajax({
-                    url: 'https://api.openweathermap.org/data/2.5/weather?lat=-6.8817373&lon=107.6175917&appid=8b994b2ded6267719bd5abaabc048876&units=metric',
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function(data) {
-                        const temperature = data.main.temp;
-                        const humidity = data.main.humidity;
+    <!-- Modal untuk menampilkan gambar -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="modalImage" src="" alt="Gambar Hama" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
 
-                        // Update Container 1
-                        $('#tempValue').text(`${temperature.toFixed(1)} °C`);
-                        $('#humidityValue').text(`${humidity.toFixed(1)} %`);
-
-                        // Update Container 3
-                        $('#dataDisplay').html(`
-                            <div class="data-item">
-                                <h5>Suhu Saat Ini</h5>
-                                <p>${temperature.toFixed(1)} °C</p>
-                            </div>
-                            <div class="data-item">
-                                <h5>Kelembaban Saat Ini</h5>
-                                <p>${humidity.toFixed(1)} %</p>
-                        `);
-
-                        $('#result').html('<h4>Hama yang mungkin muncul:</h4>' + detectPests(humidity, temperature));
-                    },
-                    error: function() {
-                        $('#dataDisplay').html('<p>Error fetching data. Please try again later.</p>');
-                    }
-                });
+    <style>
+        .landing-container {
+            background-color: #ffffff;
+        }
+        .hero-section {
+            padding: 100px 0;
+            background-color: #ffffff;
+            margin-bottom: 50px;
+        }
+        
+        .hero-text {
+            padding-right: 30px;
+        }
+        
+        .hero-text h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: #2d2d2d;
+        }
+        
+        .hero-text .lead {
+            font-size: 1.25rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .hero-buttons {
+            margin-top: 30px;
+        }
+        
+        .hero-image {
+            text-align: center;
+        }
+        
+        .hero-image img.animated {
+            animation: float 6s ease-in-out infinite;
+            max-height: 450px;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
             }
-
-            function detectPests(humidity, temperature) {
-                let pests = '';
-                if (humidity < 50 && temperature > 15) {
-                    pests = `
-                        <ul>
-                            <li><i class="fas fa-spider"></i> Hama Penggerek Batang Padi</li>
-                            <li><i class="fas fa-bug" color="green"></i> Belalang Kembara</li>
-                            <li><i class="fas fa-bug"></i> Thrips pada Cabai</li>
-                            <li><i class="fas fa-bug" style="color:red"></i> Ulat Grayak</li>
-                        </ul>`;
-                } else if (humidity >= 50 && humidity < 70 && temperature <= 25) {
-                    pests = `
-                        <ul>
-                            <li><i class="fas fa-cloud-rain"></i> Penyakit Blast</li>
-                            <li><i class="fas fa-bug"></i> Wereng</li>
-                            <li><i class="fas fa-mouse"></i> Tikus</li>
-                            <li><i class="fas fa-leaf"></i> Sundep</li>
-                            <li><i class="fas fa-seedling"></i> Hawar Daun Bakteri</li>
-                            <li><i class="fas fa-bug"></i> Ulat Tanah</li>
-                        </ul>`;
-                } else if (humidity >= 70 && temperature <= 28) {
-                    pests = `
-                        <ul>
-                            <li><i class="fas fa-spider"></i> Jamur Karat Daun</li>
-                            <li><i class="fas fa-spider"></i> Hama Penggerek Batang Padi</li>
-                            <li><i class="fas fa-caterpillar"></i> Ulat Penggerek Buah</li>
-                        </ul>`;
-                } else {
-                    pests = `
-                        <ul>
-                            <li>Data tidak mencukupi untuk mendeteksi hama spesifik. Silakan periksa kembali nilai kelembaban dan suhu.</li>
-                        </ul>`;
-                }
-                return pests;
+            50% {
+                transform: translateY(-20px);
             }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        @media (max-width: 991.98px) {
+            .hero-text {
+                text-align: center;
+                padding-right: 0;
+                margin-bottom: 40px;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-image img.animated {
+                max-height: 350px;
+            }
+        }
+        .section {
+            padding: 40px 0;
+        }
+        .section-title {
+            color: #012970;
+            margin-bottom: 20px;
+        }
+        .feature-box {
+            padding: 20px;
+            border-radius: 10px;
+            background: #ffffff;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+        .card {
+            transition: transform 0.3s;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .text-primary {
+            color: #012970 !important;
+        }
+        .text-justify {
+            text-align: justify;
+        }
+        .rice-image {
+            margin-top: 10px;
+            transition: transform 0.5s ease;
+            max-width: 100%;
+            
+        }
+        
+        .rice-image:hover {
+            transform: scale(1.1) rotate(2deg);
+        }
+        .card-title {
+            cursor: pointer;
+            color: #012970;
+            transition: color 0.3s;
+        }
+        
+        .card-title:hover {
+            color: #0d6efd;
+        }
 
-            // Initialize with default data
-            fetchWeatherData();
+        #modalImage {
+            max-height: 70vh;
+            width: auto;
+        }
 
-            // Auto-refresh data every 10 seconds
-            setInterval(fetchWeatherData, 10000);
-        });
-    </script>
+        .modal-content {
+            background-color: white;
+            border-radius: 10px;
+        }
 
-    <!-- Include JS and libraries -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        .modal-header {
+            border-bottom: 1px solid #dee2e6;
+            background-color: #f8f9fa;
+            border-radius: 10px 10px 0 0;
+        }
+    </style>
+
     <script>
-        // JavaScript to handle data box selection
-        document.querySelectorAll('.data-box').forEach(box => {
-            box.addEventListener('click', () => {
-                document.querySelectorAll('.data-box').forEach(b => b.classList.remove('selected'));
-                box.classList.add('selected');
-                const type = box.getAttribute('data-type');
-                console.log('Selected type:', type);
-                // Fetch or update data based on type here
-            });
+    function showModal(imageUrl, title) {
+        const modal = new bootstrap.Modal(document.getElementById('imageModal'));
+        document.getElementById('modalImage').src = imageUrl;
+        document.getElementById('imageModalLabel').textContent = title;
+        modal.show();
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const titles = document.querySelectorAll('.card-title');
+        titles.forEach(title => {
+            title.style.cursor = 'pointer';
         });
+    });
     </script>
-</body>
-</html>
 @endsection

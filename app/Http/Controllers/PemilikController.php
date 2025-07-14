@@ -32,6 +32,11 @@ class PemilikController extends Controller
         
         return view('Pemilik.laporan');
     }
+    public function prediksiHama()
+    {
+        $data = User::all();
+        return view('Pemilik.prediksi_hama')->with('data', $data);
+    }
     /**
      * Show the form for creating a new resource.
      */

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1>Tambah Pengajuan Barang</h1>
+        <h1>Pengajuan Barang</h1>
 
         <form action="{{ route('pengajuanbarang.store') }}" method="POST">
             @csrf
@@ -10,12 +10,11 @@
                 <label for="nama_barang">Pilih Barang</label>
                 <select name="nama_barang" class="form-control" required>
                     <option value="">-- Pilih Barang --</option>
-                    <option value="Cangkul">Cangkul</option>
-                    <option value="Ani-ani">Ani-ani</option>
-                    <option value="Gerejag">Gerejag</option>
-                    <option value="Tongkat Tunggal">Tongkat Tunggal</option>
-                    <option value="Penggaris Sawah">Penggaris Sawah</option>
-                    <option value="Gosrok">Gosrok</option>
+                    @foreach($persediaanBarang as $barang)
+                        <option value="{{ $barang->nama_barang }}">
+                            {{ $barang->nama_barang }} (Stok: {{ $barang->stok }})
+                        </option>
+                    @endforeach
                 </select>
             </div>
 
@@ -29,7 +28,7 @@
                 <textarea name="keterangan" class="form-control"></textarea>
             </div>
 
-            <button type="submit" class="btn btn-success">Tambah</button>
+            <button type="submit" class="btn btn-success">Ajukan</button>
         </form>
     </div>
 @endsection

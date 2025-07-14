@@ -75,7 +75,7 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-lg-6 d-none d-lg-block">
-                                <img src="{{asset('img')}}/logo1.png" alt="" style="width:405px;margin-left:50px;margin-top:30px;">
+                                <img src="{{asset('img')}}/LOGO2.png" alt="" style="width:405px;margin-left:50px;margin-top:30px;">
                             </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
@@ -91,7 +91,7 @@
                                         </ul>
                                     </div>
                                     @endif
-                                    <form action="" method="POST">
+                                    <form action="/login" method="POST">
                                         @csrf
                                         <div class="mb-3">
                                             <label for="email" class="form-label">Email</label>
@@ -99,7 +99,12 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="password" class="form-label">Password</label>
-                                            <input type="password" name="password" class="form-control">
+                                            <div class="input-group">
+                                                <input type="password" name="password" class="form-control" id="password">
+                                                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </div>
                                         </div>
                                         <div class="mb-3 d-grid">
                                             <button name="submit" type="submit" class="btn btn-primary">Login</button>
@@ -107,7 +112,7 @@
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="/register">Buat Akun!</a>
+                                        <a class="small" href="/register">Registrasi</a>
                                     </div>
                                 </div>
                             </div>
@@ -127,7 +132,22 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-
+    <script>
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const icon = this.querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+    </script>
 </body>
 
 </html>

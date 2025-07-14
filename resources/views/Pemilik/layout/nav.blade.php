@@ -134,7 +134,7 @@
             <div class="sidebar-brand-icon">
                 <img src="{{asset('img')}}/logo1.png" alt="Logo">
             </div>
-            <div class="sidebar-brand-text mx-3">Smart Nursery</div>
+            <div class="sidebar-brand-text mx-3">HAMAXPERT</div>
         </a>
 
         <!-- Divider -->
@@ -144,39 +144,61 @@
         <li class="nav-item">
             <a class="nav-link" href="/pemilik">
                 <i class="fas fa-fw fa-home"></i>
-                <span>Dashboard</span>
-            </a>
-        </li>
-
-        <!-- Divider -->
-        <hr class="sidebar-divider">
-
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            Addons
-        </div>
-
-        <!-- Nav Item - Danger Zone -->
-        <li class="nav-item">
-            <a class="nav-link" href="/pemilikdanger">
-                <i class="fas fa-fw fa-bug"></i>
                 <span>Prediksi Hama</span>
             </a>
         </li>
 
-        <!-- Nav Item - Monitoring Kondisi Tanah -->
+        <!-- Nav Item - Deteksi Hama -->
+        {{-- <li class="nav-item">
+            <a class="nav-link" href="{{ route('pemilik.danger') }}">
+                <i class="fas fa-fw fa-bug"></i>
+                <span>Deteksi Hama</span>
+            </a>
+        </li> --}}
+
+        <!-- Nav Item - Pengajuan Hama -->
         <li class="nav-item">
-            <a class="nav-link" href="/jadwalronda">
-                <i class="fas fa-fw fa-tools"></i>
-                <span>Monitoring Kondisi Tanah</span>
+            <a class="nav-link" href="{{ route('pemilik.pengajuanhama.create') }}">
+                <i class="fas fa-fw fa-file-alt"></i>
+                <span>Pengajuan Hama</span>
             </a>
         </li>
 
+        <!-- Nav Item - Input Data Pertanian -->
+        <li class="nav-item">
+            <a class="nav-link" href="/inputdatapertanian">
+                <i class="fas fa-fw fa-bug"></i>
+                <span>Input Data Pertanian</span>
+            </a>
+        </li>
+
+        <!-- Nav Item - Hasil Pertanian -->
+        <li class="nav-item">
+            <a class="nav-link" href="/hasilpertanianpetani">
+                <i class="fas fa-fw fa-tools"></i>
+                <span>Hasil Pertanian</span>
+            </a>
+        </li>
+
+        <!-- Tambahkan menu Monitoring Hama -->
+       
+
+        <!-- Tambahkan menu Monitoring Cuaca -->
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('monitoringcuaca.index') }}">
+                <i class="fas fa-cloud-sun"></i>
+                <span>Monitoring Cuaca</span>
+            </a>
+        </li>
+
+        <!-- Nav Item - Pengajuan Barang -->
+        
+
         <!-- Nav Item - History Laporan -->
         <li class="nav-item">
-            <a class="nav-link" href="/laporan">
-                <i class="fas fa-fw fa-calendar"></i>
-                <span>Laporan</span>
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
+                <i class="fas fa-fw fa-sign-out-alt"></i>
+                <span>Logout</span>
             </a>
         </li>
 
@@ -189,7 +211,28 @@
         </div>
     </ul>
     <!-- End of Sidebar -->
-
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="logoutModalLabel">Yakin mau keluar?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Tutup">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Pilih "Yes" di bawah jika kamu ingin keluar dari sesi ini.
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Yes</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script>

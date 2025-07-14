@@ -1,352 +1,454 @@
 @extends('pemilik.layout.template')
 @section('content')
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monitoring Kondisi Cuaca</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        body {
-            background-color: #f0f2f5;
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .data-box {
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            background-color: #ffffff;
-            margin-bottom: 30px;
-            transition: background-color 0.3s, border-color 0.3s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 180px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .data-box.selected {
-            border-color: #012970;
-            background-color: #eaf4ff;
-        }
-        .data-box i {
-            font-size: 40px;
-            margin-bottom: 10px;
-            color: #012970;
-        }
-        .data-box h5 {
-            margin: 10px 0;
-            font-size: 1.2rem;
-        }
-        .data-box p {
-            font-size: 1.1rem;
-            color: #333;
-        }
-        .chart-container {
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 20px;
-            background-color: #ffffff;
-            margin-bottom: 40px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .chart-container canvas {
-            width: 100% !important;
-            height: 500px !important;
-        }
-        .chart-header {
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-            text-align: center;
-            font-weight: bold;
-            color: #012970;
-        }
-        .btn {
-            margin-top: 20px;
-        }
-    </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
-</head>
-<body>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-12 text-center mb-4">
-                <h1>Monitoring Kondisi Cuaca</h1>
-                <p class="lead">Pilih data yang ingin Anda tampilkan di grafik dengan mengklik kotak data.</p>
-            </div>
-        </div>
-        <div class="row mb-4">
-            <div class="col-md-3">
-                <div id="tempBox" class="data-box" data-type="temperature">
-                    <i class="fas fa-thermometer-half"></i>
-                    <h5>Suhu</h5>
-                    <p id="tempValue">25°C</p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div id="humidityBox" class="data-box" data-type="humidity">
-                    <i class="fas fa-tint"></i>
-                    <h5>Kelembaban</h5>
-                    <p id="humidityValue">70%</p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div id="rainBox" class="data-box" data-type="rainfall">
-                    <i class="fas fa-cloud-rain"></i>
-                    <h5>Curah Hujan</h5>
-                    <p id="rainValue">100 mm</p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div id="solarBox" class="data-box" data-type="solar">
-                    <i class="fas fa-sun"></i>
-                    <h5>Radiasi Matahari</h5>
-                    <p id="solarValue">600 W/m²</p>
-                </div>
-            </div>
-        </div>
+    <html lang="en">
 
-        <div class="row">
-            <div class="col-md-4">
-                <select id="timePeriod" class="form-control">
-                    <option value="week">1 Minggu Terakhir</option>
-                    <option value="month">3 Bulan Terakhir</option>
-                    <option value="year">3 Tahun Terakhir</option>
-                </select>
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-12">
-                <div class="chart-container">
-                    <div class="chart-header">Monitoring Data</div>
-                    <canvas id="mainChart"></canvas>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mt-4 justify-content-center">
-            <div class="col-md-4 text-center">
-                <button class="btn btn-primary" id="exportBtn">Export History</button>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        let selectedData = {};
-        let mainChart = null;
-
-        $('.data-box').click(function() {
-            const dataType = $(this).data('type');
-            $(this).toggleClass('selected');
-
-            if ($(this).hasClass('selected')) {
-                selectedData[dataType] = true;
-            } else {
-                delete selectedData[dataType];
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Deteksi Hama Berdasarkan Kelembaban dan Suhu</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+        <style>
+            .pest-detection-page body {
+                font-family: 'Poppins', sans-serif;
             }
 
-            updateChart();
-        });
+            .pest-detection-page .custom-content {
+                background-color: #f8f9fa;
+            }
 
-        $('#timePeriod').change(function() {
-            updateChart();
-        });
+            .pest-detection-page .card {
+                border-radius: 15px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
 
-        function updateChart() {
-            const period = $('#timePeriod').val();
-            const labels = getLabelsForPeriod(period);
-            const chartData = {
-                labels: labels,
-                datasets: []
-            };
+            .pest-detection-page .card-title {
+                color: #333;
+                font-weight: 700;
+            }
 
-            for (const [type, isSelected] of Object.entries(selectedData)) {
-                if (isSelected) {
-                    chartData.datasets.push({
-                        label: getLabelForDataType(type),
-                        data: generateDataForPeriod(type, period),
-                        backgroundColor: getColorForDataType(type, 'background'),
-                        borderColor: getColorForDataType(type, 'border'),
-                        borderWidth: 2,
-                        fill: false
+            .pest-detection-page .data-container {
+                display: flex;
+                justify-content: space-around;
+                margin-top: 20px;
+            }
+
+            .pest-detection-page .data-item {
+                text-align: center;
+                padding: 10px;
+            }
+
+            .pest-detection-page .data-item h5 {
+                color: #495057;
+                font-size: 1rem;
+            }
+
+            .pest-detection-page .data-item p {
+                color: #007bff;
+                font-size: 1.5rem;
+                font-weight: 700;
+                margin-bottom: 0;
+            }
+
+            #coordinateForm {
+                display: none;
+                margin-top: 10px;
+            }
+
+            .center-button,
+            .center-form {
+                text-align: center;
+                margin-bottom: 15px;
+            }
+
+            .center-form form {
+                display: inline-block;
+                text-align: left;
+            }
+
+            .center-form .form-row {
+                justify-content: center;
+            }
+
+            #result ul, #handling ul {
+                list-style-type: none;
+                padding-left: 0;
+            }
+            
+            #result li, #handling li {
+                margin-bottom: 10px;
+                padding: 8px;
+                background-color: #f8f9fa;
+                border-radius: 5px;
+            }
+            
+            #result li i {
+                margin-right: 8px;
+                color: #dc3545;
+            }
+            
+            .data-item {
+                background-color: white;
+                padding: 15px;
+                border-radius: 10px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            
+            .data-item h5 {
+                color: #6c757d;
+                margin-bottom: 10px;
+            }
+            
+            .data-item p {
+                font-size: 24px;
+                font-weight: bold;
+                color: #007bff;
+                margin: 0;
+            }
+            
+            #map-container {
+                margin: 20px 0;
+                border-radius: 10px;
+                overflow: hidden;
+            }
+            
+            #map {
+                border-radius: 10px;
+            }
+        </style>
+    </head>
+
+    <body class="custom-content pest-detection-page">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">
+                                <img src="{{asset('img')}}/semut.gif" height="150px" style="margin-top: -70px;">
+                                Deteksi Hama Berdasarkan Kelembaban dan Suhu
+                            </h5>
+                            <div class="text-center mt-4 weather-info">
+                                <p><img src="{{asset('img')}}/cuaca.png" height="70px" style="margin-top: -10px;">Cuaca saat
+                                    ini di <span id="locationName">Bandung</span> </p>
+                            </div>
+                            <div class="center-button">
+                                <button id="openMapBtn" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-map-marker-alt"></i> Ganti Lokasi
+                                </button>
+                            </div>
+                            <div id="map-container" style="display: none;">
+                                <div class="text-right mb-2">
+                                    <button id="closeMapBtn" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-times"></i> Tutup Peta
+                                    </button>
+                                </div>
+                                <div class="mb-3">
+                                    <button id="detectLocationBtn" class="btn btn-success btn-sm">
+                                        <i class="fas fa-location-arrow"></i> Deteksi Lokasi Otomatis
+                                    </button>
+                                </div>
+                                <div id="map" style="height: 400px;"></div>
+                            </div>
+                            <div id="dataDisplay" class="data-container">
+                                <!-- Data akan ditampilkan di sini -->
+                            </div>
+                            <div id="result" class="mt-4">
+                                <h4> Hama yang mungkin muncul:</h4>
+                                <!-- Hasil deteksi hama akan ditampilkan di sini -->
+                            </div>
+                            <div id="handling" class="mt-4">
+                                <h4> Saran Penanganan:</h4>
+                                <!-- Saran penanganan hama akan ditampilkan di sini -->
+                            </div>
+
+                            <!-- Tambahkan bagian persebaran hama -->
+                            <div class="mt-4">
+                                <h4>Persebaran Hama:</h4>
+                                <div id="persebaran-map" style="height: 400px; border-radius: 10px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                let lat = -6.2088; // Default latitude (Bandung)
+                let lon = 106.8456; // Default longitude (Bandung)
+                let map = null;
+                let marker = null;
+
+                // Cek localStorage untuk koordinat yang tersimpan
+                if (localStorage.getItem('latitude') && localStorage.getItem('longitude')) {
+                    lat = parseFloat(localStorage.getItem('latitude'));
+                    lon = parseFloat(localStorage.getItem('longitude'));
+                }
+
+                function fetchLocationName(lat, lon) {
+                    $.ajax({
+                        url: `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=18&addressdetails=1`,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (data) {
+                            let locationName = data.address.city || data.address.town || data.address.village || data.address.hamlet || data.address.suburb || data.display_name.split(',')[0];
+                            $('#locationName').text(locationName);
+                        },
+                        error: function () {
+                            $('#locationName').text('Lokasi tidak diketahui');
+                        }
                     });
                 }
-            }
 
-            const ctx = document.getElementById('mainChart').getContext('2d');
-            if (mainChart) {
-                mainChart.data = chartData; // Update the chart data
-                mainChart.update(); // Update the chart display
-            } else {
-                mainChart = new Chart(ctx, {
-                    type: 'line',
-                    data: chartData,
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            x: {
-                                title: {
-                                    display: true,
-                                    text: 'Waktu'
-                                }
-                            },
-                            y: {
-                                title: {
-                                    display: true,
-                                    text: 'Nilai'
-                                },
-                                beginAtZero: true
-                            }
+                function fetchWeatherData() {
+                    $.ajax({
+                        url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=8b994b2ded6267719bd5abaabc048876&units=metric`,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (data) {
+                            const temperature = data.main.temp;
+                            const humidity = data.main.humidity;
+
+                            fetchLocationName(lat, lon);
+
+                            $('#dataDisplay').html(`
+                                <div class="data-item">
+                                    <h5>Suhu Saat Ini</h5>
+                                    <p>${temperature.toFixed(1)} °C</p>
+                                </div>
+                                <div class="data-item">
+                                    <h5>Kelembaban Saat Ini</h5>
+                                    <p>${humidity.toFixed(1)} %</p>
+                                </div>
+                            `);
+
+                            const pests = detectPests(humidity, temperature);
+                            $('#result').html('<h4>Hama yang mungkin muncul:</h4>' + pests.names);
+                            $('#handling').html('<h4>Saran Penanganan:</h4>' + pests.handling);
                         },
-                        plugins: {
-                            legend: {
-                                position: 'top',
-                                labels: {
-                                    font: {
-                                        size: 14
-                                    }
-                                }
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(tooltipItem) {
-                                        return tooltipItem.dataset.label + ': ' + tooltipItem.raw.toFixed(2);
-                                    }
-                                }
-                            }
+                        error: function (error) {
+                            console.error('Error fetching weather data:', error);
+                            $('#dataDisplay').html('<p>Error mengambil data cuaca. Silakan coba lagi nanti.</p>');
                         }
+                    });
+                }
+
+                function detectPests(humidity, temperature) {
+                    let names = '<ul>';
+                    let handling = '<ul>';
+                    let pestFound = false;
+                    
+                    $.ajax({
+                        url: '/get-hama-data',
+                        type: 'GET',
+                        async: false,
+                        success: function(data) {
+                            data.forEach(function(hama) {
+                                if (humidity >= parseFloat(hama.min_humidity) && 
+                                    humidity <= parseFloat(hama.max_humidity) && 
+                                    temperature >= parseFloat(hama.min_temperature) && 
+                                    temperature <= parseFloat(hama.max_temperature)) {
+                                    
+                                    pestFound = true;
+                                    names += `<li><i class="${hama.icon}"></i> ${hama.nama_hama}</li>`;
+                                    
+                                    // Parse rekomendasi jika dalam format JSON string
+                                    let rekomendasi = hama.rekomendasi;
+                                    if (typeof rekomendasi === 'string') {
+                                        try {
+                                            rekomendasi = JSON.parse(rekomendasi);
+                                        } catch (e) {
+                                            console.error('Error parsing rekomendasi:', e);
+                                            rekomendasi = [rekomendasi];
+                                        }
+                                    }
+                                    
+                                    // Pastikan rekomendasi adalah array
+                                    if (!Array.isArray(rekomendasi)) {
+                                        rekomendasi = [rekomendasi];
+                                    }
+                                    
+                                    // Tambahkan setiap rekomendasi ke daftar
+                                    rekomendasi.forEach(function(item) {
+                                        if (item) {
+                                            handling += `<li>${item}</li>`;
+                                        }
+                                    });
+                                }
+                            });
+                        },
+                        error: function(error) {
+                            console.error('Error fetching hama data:', error);
+                            names = '<ul><li>Error mengambil data hama</li></ul>';
+                            handling = '<ul><li>Error mengambil data rekomendasi</li></ul>';
+                        }
+                    });
+
+                    names += '</ul>';
+                    handling += '</ul>';
+
+                    if (!pestFound) {
+                        names = '<ul><li>Tidak terdeteksi hama</li></ul>';
+                        handling = '<ul><li>Tidak ada rekomendasi penanganan</li></ul>';
+                    }
+
+                    return { names, handling };
+                }
+
+                $('#openMapBtn').on('click', function () {
+                    $('#map-container').show();
+                    if (!map) {
+                        map = L.map('map').setView([lat, lon], 13);
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            attribution: '© OpenStreetMap contributors'
+                        }).addTo(map);
+                        marker = L.marker([lat, lon]).addTo(map);
+
+                        map.on('click', function (e) {
+                            const newLat = e.latlng.lat;
+                            const newLon = e.latlng.lng;
+
+                            $.ajax({
+                                url: `https://nominatim.openstreetmap.org/reverse?format=json&lat=${newLat}&lon=${newLon}&zoom=18&addressdetails=1`,
+                                type: 'GET',
+                                dataType: 'json',
+                                success: function (data) {
+                                    const locationName = data.display_name;
+                                    if (confirm(`Apakah Anda yakin ingin memilih lokasi ini?\n\nLokasi: ${locationName}`)) {
+                                        lat = newLat;
+                                        lon = newLon;
+                                        localStorage.setItem('latitude', lat);
+                                        localStorage.setItem('longitude', lon);
+                                        marker.setLatLng([lat, lon]);
+                                        fetchWeatherData();
+                                        $('#map-container').hide();
+                                    }
+                                },
+                                error: function () {
+                                    if (confirm('Apakah Anda yakin ingin memilih lokasi ini?')) {
+                                        lat = newLat;
+                                        lon = newLon;
+                                        localStorage.setItem('latitude', lat);
+                                        localStorage.setItem('longitude', lon);
+                                        marker.setLatLng([lat, lon]);
+                                        fetchWeatherData();
+                                        $('#map-container').hide();
+                                    }
+                                }
+                            });
+                        });
+                    } else {
+                        map.setView([lat, lon], 13);
+                        marker.setLatLng([lat, lon]);
+                    }
+
+                    setTimeout(function () {
+                        map.invalidateSize();
+                    }, 100);
+                });
+
+                $('#detectLocationBtn').on('click', function () {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(function (position) {
+                            lat = position.coords.latitude;
+                            lon = position.coords.longitude;
+                            localStorage.setItem('latitude', lat);
+                            localStorage.setItem('longitude', lon);
+                            
+                            // Update marker position
+                            if (marker) {
+                                marker.setLatLng([lat, lon]);
+                            }
+                            
+                            // Update map view
+                            map.setView([lat, lon], 13);
+                            
+                            // Fetch location name and weather data
+                            fetchLocationName(lat, lon);
+                            fetchWeatherData();
+                            
+                            // Close map container
+                            $('#map-container').hide();
+                        }, function () {
+                            alert('Tidak dapat mendeteksi lokasi. Silakan pilih lokasi di peta.');
+                        });
+                    } else {
+                        alert('Geolocation tidak didukung oleh browser Anda. Silakan pilih lokasi di peta.');
                     }
                 });
-            }
-        }
 
-        function getLabelsForPeriod(period) {
-            const now = new Date();
-            if (period === 'week') {
-                return Array.from({ length: 7 }, (_, i) => {
-                    const date = new Date();
-                    date.setDate(now.getDate() - (6 - i));
-                    return date.toLocaleDateString('id-ID');
+                $('#closeMapBtn').on('click', function () {
+                    $('#map-container').hide();
                 });
-            } else if (period === 'month') {
-                const months = [];
-                for (let i = 0; i < 3; i++) {
-                    const date = new Date();
-                    date.setMonth(now.getMonth() - i);
-                    months.unshift(date.toLocaleDateString('id-ID', { month: 'short', year: 'numeric' }));
-                }
-                return months;
-            } else if (period === 'year') {
-                return Array.from({ length: 3 }, (_, i) => {
-                    const date = new Date();
-                    date.setFullYear(now.getFullYear() - i);
-                    return date.getFullYear();
-                }).reverse();
-            }
-            return [];
-        }
 
-        function generateDataForPeriod(type, period) {
-            if (period === 'week') {
-                return Array.from({ length: 7 }, () => getRandomValueForType(type));
-            } else if (period === 'month') {
-                return Array.from({ length: 3 }, () => getRandomValueForType(type));
-            } else if (period === 'year') {
-                return Array.from({ length: 3 }, () => getRandomValueForType(type));
-            }
-            return [];
-        }
+                // Initialize with saved or default data
+                fetchWeatherData();
 
-        function getRandomValueForType(type) {
-            if (type === 'temperature') {
-                return Math.random() * (31 - 17) + 17;
-            } else if (type === 'humidity') {
-                return Math.random() * (70 - 40) + 40;
-            } else if (type === 'rainfall') {
-                return Math.random() * 200;
-            } else if (type === 'solar') {
-                return Math.random() * 1000;
-            }
-            return 0;
-        }
+                // Auto-refresh data every 30 seconds
+                setInterval(fetchWeatherData, 30000);
 
-        function getLabelForDataType(type) {
-            if (type === 'temperature') {
-                return 'Suhu (°C)';
-            } else if (type === 'humidity') {
-                return 'Kelembaban (%)';
-            } else if (type === 'rainfall') {
-                return 'Curah Hujan (mm)';
-            } else if (type === 'solar') {
-                return 'Radiasi Matahari (W/m²)';
-            }
-            return '';
-        }
+                // Inisialisasi peta persebaran hama
+                const persebaranMap = L.map('persebaran-map').setView([-2.5489, 118.0149], 5);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(persebaranMap);
 
-        function getColorForDataType(type, colorType) {
-            const colors = {
-                temperature: { background: 'rgba(255, 99, 132, 0.2)', border: 'rgba(255, 99, 132, 1)' },
-                humidity: { background: 'rgba(54, 162, 235, 0.2)', border: 'rgba(54, 162, 235, 1)' },
-                rainfall: { background: 'rgba(75, 192, 192, 0.2)', border: 'rgba(75, 192, 192, 1)' },
-                solar: { background: 'rgba(255, 206, 86, 0.2)', border: 'rgba(255, 206, 86, 1)' }
-            };
-            return colors[type][colorType];
-        }
+                // Ambil data persebaran hama
+                $.ajax({
+                    url: '/get-persebaran-hama',
+                    type: 'GET',
+                    success: function(data) {
+                        // Kelompokkan data berdasarkan jenis hama
+                        const hamaGroups = {};
+                        data.forEach(item => {
+                            if (!hamaGroups[item.jenis_hama]) {
+                                hamaGroups[item.jenis_hama] = [];
+                            }
+                            hamaGroups[item.jenis_hama].push(item);
+                        });
 
-        $('#exportBtn').click(function() {
-    // Prepare data for export
-    const period = $('#timePeriod').val();
-    const labels = getLabelsForPeriod(period);
-    const exportData = [];
+                        // Buat marker untuk setiap jenis hama
+                        Object.keys(hamaGroups).forEach(jenisHama => {
+                            const markers = hamaGroups[jenisHama].map(item => {
+                                const popupContent = `
+                                    <div>
+                                        <h6>${item.jenis_hama}</h6>
+                                        <p><strong>Lokasi:</strong> ${item.lokasi}</p>
+                                        <p><strong>Waktu:</strong> ${item.waktu_pelaporan}</p>
+                                        <p><strong>Suhu:</strong> ${item.suhu}°C</p>
+                                        <p><strong>Kelembaban:</strong> ${item.kelembaban}%</p>
+                                        <p><strong>Keterangan:</strong> ${item.keterangan}</p>
+                                    </div>
+                                `;
+                                
+                                return L.marker([item.koordinat_lat, item.koordinat_lon])
+                                    .bindPopup(popupContent);
+                            });
 
-    for (const [type, isSelected] of Object.entries(selectedData)) {
-        if (isSelected) {
-            exportData.push({
-                label: getLabelForDataType(type),
-                data: generateDataForPeriod(type, period)
+                            // Tambahkan layer group ke peta
+                            const group = L.layerGroup(markers).addTo(persebaranMap);
+                            
+                            // Tambahkan ke control layer
+                            L.control.layers(null, {
+                                [jenisHama]: group
+                            }).addTo(persebaranMap);
+                        });
+                    },
+                    error: function(error) {
+                        console.error('Error:', error);
+                        $('#persebaran-map').html('<p class="text-danger">Gagal memuat data persebaran hama</p>');
+                    }
+                });
             });
-        }
-    }
+        </script>
+    </body>
 
-    // Create a workbook and add the data
-    const wb = XLSX.utils.book_new();
-    const ws_data = [];
+    </html>
 
-    // Add header
-    const header = ['Waktu'];
-    exportData.forEach(item => header.push(item.label));
-    ws_data.push(header);
-
-    // Add data rows
-    labels.forEach((label, index) => {
-        const row = [label];
-        exportData.forEach(item => row.push(item.data[index].toFixed(2)));
-        ws_data.push(row);
-    });
-
-    const ws = XLSX.utils.aoa_to_sheet(ws_data);
-    XLSX.utils.book_append_sheet(wb, ws, 'Data Export');
-
-    // Export the workbook
-    XLSX.writeFile(wb, 'data_Cuaca.xlsx');
-});
-
-$(document).ready(function() {
-    updateChart();
-});
-    </script>
-</body>
-</html>
 @endsection

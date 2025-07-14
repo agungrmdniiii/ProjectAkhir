@@ -10,6 +10,11 @@ class SesiController extends Controller
 {
     public function index()
     {
+        return view('landing');
+    }
+
+    public function loginPage()
+    {
         return view('Autentikasi/login');
     }
 
@@ -30,7 +35,7 @@ class SesiController extends Controller
 
         if (Auth::attempt($infologin)) {
             if (Auth::user()->role == "admin") {
-                return redirect('/home');
+                return redirect('/danger');
             } elseif (Auth::user()->role == "user") {
                 return redirect('/pemilik');
             } elseif (Auth::user()->role == "siskamling") {
@@ -43,8 +48,9 @@ class SesiController extends Controller
 
     public function logout()
     {
+        // dd(Auth::user());
         Auth::logout();
-        return redirect('');
+        return redirect()->route('login');
     }
 
     public function showRegisterForm()

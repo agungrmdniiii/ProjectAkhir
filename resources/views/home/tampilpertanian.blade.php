@@ -14,7 +14,6 @@
         <thead>
             <tr>
                 <th>No.</th>
-                <th>Nama</th>
                 <th>Jumlah Pestisida</th>
                 <th>Lama Panen</th>
                 <th>Hasil Panen</th>
@@ -25,8 +24,7 @@
         <tbody>
             @foreach($dataPertanian as $index => $data)
             <tr>
-                <td>{{ $index + 1 }}</td> <!-- Auto-increment number -->
-                <td>{{ $data->nama }}</td>
+                <td>{{ $index + 1 }}</td> <!-- Auto-increment number -->        
                 <td>{{ $data->jumlah_pestisida }}</td>
                 <td>{{ $data->lama_panen }}</td>
                 <td>{{ $data->hasil_panen }}</td>

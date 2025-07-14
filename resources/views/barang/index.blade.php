@@ -31,10 +31,14 @@
                         <td>{{ $barang->jumlah }}</td>
                         <td>{{ $barang->keterangan }}</td>
                         <td>
-                            <!-- Tombol edit -->
-                            <a href="{{ route('pengajuanbarang.edit', $barang->id) }}" class="btn btn-warning">Edit</a>
+                            <!-- Tombol setujui -->
+                            <form action="{{ route('pengajuanbarang.setujui', $barang->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('POST')
+                                <button type="submit" class="btn btn-success">Setujui</button>
+                            </form>
 
-                            <!-- Tombol hapus dengan form -->
+                            <!-- Tombol hapus -->
                             <form action="{{ route('pengajuanbarang.destroy', $barang->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')

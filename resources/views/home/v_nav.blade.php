@@ -124,17 +124,17 @@
         /* Custom styles for the sidebar */
         .sidebar {
             width: 300px;
-            font-size: 10px !important; /* Lebar sidebar */
+            font-size: 10px !important;
         }
         .sidebar.toggled {
-            width: 80px; /* Lebar sidebar saat toggled */
+            width: 80px;
         }
         .nav-link {
-            font-size: 1.1rem; /* Ukuran font untuk tautan di sidebar */
-            padding: 15px 25px; /* Menambah padding agar link terlihat lebih besar */
+            font-size: 1.1rem;
+            padding: 15px 25px;
         }
         .nav-link i {
-            font-size: 1.5rem; /* Ukuran ikon di sidebar */
+            font-size: 1.5rem;
             margin-right: 10px;
         }
         .sidebar-heading {
@@ -144,6 +144,197 @@
             margin: 0 25px;
         }
         
+        /* Tambahan CSS untuk dropdown */
+        .collapse-inner {
+            padding: 0.5rem 1rem;
+        }
+        .collapse-item {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: #012970;
+            text-decoration: none;
+            border-radius: 0.35rem;
+            white-space: nowrap;
+        }
+        .collapse-item:hover {
+            background-color: #f8f9fc;
+            text-decoration: none;
+            color: #012970;
+        }
+        .collapse-item i {
+            font-size: 0.85rem;
+        }
+        .collapse {
+            transition: all 0.2s ease;
+        }
+
+        .nav-link[data-toggle="collapse"].collapsed:after {
+            content: '\f105';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            float: right;
+            margin-left: auto;
+        }
+
+        .nav-link[data-toggle="collapse"]:after {
+            content: '\f107';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            float: right;
+            margin-left: auto;
+        }
+
+        .nav-link[data-toggle="collapse"] {
+            position: relative;
+        }
+
+        /* CSS untuk dropdown */
+        .nav-item .collapse {
+            display: none;
+        }
+
+        .nav-item .collapse.show {
+            display: block;
+        }
+
+        .nav-link[data-toggle="collapse"]:after {
+            content: '\f107';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            float: right;
+            margin-left: auto;
+            transition: transform 0.3s;
+        }
+
+        .nav-link[data-toggle="collapse"].collapsed:after {
+            transform: rotate(-90deg);
+        }
+
+        .collapse-inner {
+            padding: 0.5rem 1rem;
+            background: white;
+            border-radius: 0.35rem;
+            margin: 0 1rem;
+        }
+
+        .collapse-item {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: #012970;
+            text-decoration: none;
+            border-radius: 0.35rem;
+            white-space: nowrap;
+        }
+
+        .collapse-item:hover {
+            background-color: #f8f9fc;
+            text-decoration: none;
+            color: #012970;
+        }
+
+        /* CSS untuk tanda panah dropdown */
+        .nav-link[data-bs-toggle="collapse"]:after {
+            content: '\f107';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            float: right;
+            margin-left: auto;
+            transition: transform 0.3s;
+        }
+
+        .nav-link[data-bs-toggle="collapse"].collapsed:after {
+            transform: rotate(-90deg);
+        }
+
+        /* Pastikan tanda panah tetap terlihat */
+        .nav-link[data-bs-toggle="collapse"] {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-link[data-bs-toggle="collapse"] span {
+            flex: 1;
+        }
+
+        /* CSS untuk menu sidebar */
+        .nav-item {
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .nav-link {
+            font-size: 0.9rem;  /* Ukuran font dikecilkan */
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        .nav-link i {
+            font-size: 1.1rem;  /* Ukuran icon dikecilkan */
+            min-width: 25px;    /* Lebar minimum untuk icon */
+            margin-right: 8px;  /* Jarak antara icon dan text */
+        }
+
+        .nav-link span {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Memperlebar sidebar sedikit */
+        .sidebar {
+            width: 280px;
+        }
+
+        /* Mengatur ulang padding untuk dropdown items */
+        .collapse-item {
+            font-size: 0.85rem;
+            padding: 8px 15px;
+            white-space: nowrap;
+        }
+
+        .collapse-header {
+            padding: 0.5rem 1rem;
+            margin-bottom: 0;
+            font-size: 0.65rem;
+            color: #012970;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .collapse-inner {
+            padding: 0.5rem 0;
+            min-width: 10rem;
+            font-size: 0.85rem;
+            margin: 0 0.7rem;
+            background-color: #fff;
+            border-radius: 0.35rem;
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+        }
+
+        .collapse-item {
+            display: block;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            color: #012970;
+            text-decoration: none;
+            border-radius: 0.35rem;
+            white-space: nowrap;
+        }
+
+        .collapse-item:hover {
+            background-color: #f8f9fc;
+            color: #012970;
+            text-decoration: none;
+        }
+
+        .collapse-item i {
+            margin-right: 0.5rem;
+            font-size: 0.85rem;
+        }
     </style>
 </head>
 <body>
@@ -161,12 +352,12 @@
         <hr class="sidebar-divider my-0">
 
         <!-- Nav Item - Dashboard -->
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a class="nav-link" href="/home">
                 <i class="fas fa-fw fa-home"></i>
                 <span>Dashboard</span>
             </a>
-        </li>
+        </li> --}}
 
         <!-- Divider -->
         <hr class="sidebar-divider">
@@ -183,62 +374,75 @@
                 <span>Prediksi Hama</span>
             </a>
         </li>
-
-        <!-- Nav Item - Monitoring Kondisi Tanah -->
         <li class="nav-item">
-            <a class="nav-link" href="/inputdata">
-                <i class="fas fa-fw fa-tools"></i>
-                <span>Upload Data Pertanian</span>
+            <a class="nav-link" href="{{ route('manage.hama') }}">
+                <i class="fas fa-bug"></i>
+                <span>Kelola Data Hama</span>
             </a>
+        </li>
+        <!-- Nav Item - Data Pertanian Dropdown -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseDataPertanian"
+                aria-expanded="false" aria-controls="collapseDataPertanian">
+                <i class="fas fa-fw fa-leaf"></i>
+                <span>Data Pertanian</span>
+            </a>
+            <div id="collapseDataPertanian" class="collapse" data-bs-parent="#accordionSidebar">
+                <div class="collapse-inner">
+                    <a class="collapse-item" href="/inputdata">
+                        <i class="fas fa-fw fa-upload mr-2"></i>Upload Data
+                    </a>
+                    <a class="collapse-item" href="{{ route('data.show') }}">
+                        <i class="fas fa-fw fa-chart-line mr-2"></i>Monitoring Hasil
+                    </a>
+                    <a class="collapse-item" href="{{ route('data.hasil') }}">
+                        <i class="fas fa-fw fa-seedling mr-2"></i>Hasil Pertanian
+                    </a>
+                </div>
+            </div>
+        </li>
+<!-- Nav Item - Manajemen Barang Dropdown -->
+{{-- <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseManajemenBarang"
+        aria-expanded="false" aria-controls="collapseManajemenBarang">
+        <i class="fas fa-boxes"></i>
+        <span>Manajemen Barang</span>
+    </a>
+    <div id="collapseManajemenBarang" class="collapse" data-bs-parent="#accordionSidebar">
+        <div class="collapse-inner">
             
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('data.show') }}">
-                <i class="fas fa-seedling"></i>
-                <span>Monitoring Hasil Pertanian</span>
+            <a class="collapse-item" href="{{ route('pengajuanbarang.edit', ['pengajuanbarang' => 0]) }}">
+                <i class="fas fa-warehouse mr-2"></i>Kelola Persediaan
             </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('data.hasil') }}">
-                <i class="fas fa-seedling"></i>
-                <span>Hasil Pertanian</span>
+            <a class="collapse-item" href="{{ route('pengajuanbarang.create') }}">
+                <i class="fas fa-file-alt mr-2"></i>Buat Pengajuan
             </a>
-        </li>
+            <a class="collapse-item" href="{{ route('pengajuanbarang.index') }}">
+                <i class="fas fa-list-alt mr-2"></i>Daftar Pengajuan
+            </a>
+        </div>
+    </div>
+</li> --}}
         <li class="nav-item">
             <a class="nav-link" href="/kondisicuaca">
                 <i class="fas fa-cloud-sun"></i>
                 <span>Monitoring Kondisi Cuaca</span>
             </a>
         </li>
-        <!-- Tambahkan link ke kelola persediaan barang -->
 
-
-<!-- Sidebar Item: Tambah Pengajuan Barang -->
-<li class="nav-item">
-    <a class="nav-link" href="{{ route('pengajuanbarang.create') }}">
-        <i class="fas fa-plus"></i>
-        <span>Pengajuan Barang</span>
-    </a>
-</li>
-<li class="nav-item">
-    <a class="nav-link" href="{{ route('pengajuanbarang.index') }}">
-        <i class="fas fa-box"></i>
-        <span>Kelola Persediaan Barang</span>
-    </a>
-</li>
-
+        <!-- Nav Item - Pengajuan Hama -->
         <li class="nav-item">
-            <a class="nav-link" href="/monitoring">
-                <i class="fas fa-fw fa-broadcast-tower"></i>
-                <span>Control Device</span>
+            <a class="nav-link" href="{{ route('pengajuanhama.create') }}">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>Laporkan Hama</span>
             </a>
         </li>
 
-        <!-- Nav Item - History Laporan -->
+        <!-- Nav Item - Daftar Pengajuan Hama -->
         <li class="nav-item">
-            <a class="nav-link" href="/history">
-                <i class="fas fa-fw fa-calendar"></i>
-                <span>Laporan</span>
+            <a class="nav-link" href="{{ route('pengajuanhama.index') }}">
+                <i class="fas fa-list"></i>
+                <span>Daftar Laporan Hama</span>
             </a>
         </li>
 
@@ -261,31 +465,59 @@
     <!-- End of Sidebar -->
 
     <!-- Logout Modal -->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <!-- Logout Modal-->
+<!-- Logout Modal -->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Yakin mau keluar?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
+                    <h5 class="modal-title" id="logoutModalLabel">Yakin mau keluar?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Tutup">
+                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">Pilih "Logout" dibawah jika kamu sudah menyudahi sesimu!.</div>
+                <div class="modal-body">
+                    Pilih "Yes" di bawah jika kamu ingin keluar dari sesi ini.
+                </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="/logout">Logout</a>
+                    <button type="submit" class="btn btn-primary">Yes</button>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
+</div>
+
+
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $('#sidebarToggle').on('click', function () {
+        $(document).ready(function() {
+            // Sidebar toggle
+            $('#sidebarToggle').on('click', function() {
                 $('#accordionSidebar').toggleClass('toggled');
+            });
+
+            // Dropdown toggle
+            $('[data-bs-toggle="collapse"]').on('click', function(e) {
+                e.preventDefault();
+                const $this = $(this);
+                const $target = $($this.data('bs-target'));
+                
+                // Toggle collapse
+                if ($target.hasClass('show')) {
+                    $target.collapse('hide');
+                } else {
+                    $('.collapse').collapse('hide');
+                    $target.collapse('show');
+                }
+                
+                // Toggle collapsed class
+                $this.toggleClass('collapsed', !$target.hasClass('show'));
             });
         });
     </script>
